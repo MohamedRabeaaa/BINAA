@@ -29,8 +29,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
       // Simulate login delay
       await Future.delayed(const Duration(seconds: 2));
-
-      // TODO: Implement actual login logic here
       
       if (mounted) {
         setState(() {
@@ -50,17 +48,17 @@ class _LoginScreenState extends State<LoginScreen> {
           child: Padding(
             padding: const EdgeInsets.all(24.0),
             child: ConstrainedBox(
-              constraints: const BoxConstraints(maxWidth: 400),
+              constraints: const BoxConstraints(maxWidth: 800), // Increased max width for grid layout
               child: Form(
                 key: _formKey,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    // Logo and Title
+                    // First Row - Logo Container (spans all columns)
                     Container(
-                      height: 120,
-                      width: 120,
+                      height: 300,
+                      width: double.infinity,
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(20),
@@ -76,12 +74,16 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(20),
                         child: Image.asset(
-                          'assets/images/logo.png',
-                          fit: BoxFit.contain,
+                          'assets/images/BINAA logo.png',
+                          fit: BoxFit.fill,
+                          width: double.infinity,
+                          height: double.infinity,
                         ),
                       ),
                     ),
-                    const SizedBox(height: 24),
+                    const SizedBox(height: 32),
+
+                    // Second Row - Title
                     Text(
                       'BINAA بناء',
                       style: Theme.of(context).textTheme.headlineMedium?.copyWith(
@@ -89,17 +91,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       textAlign: TextAlign.center,
                     ),
-                    const SizedBox(height: 8),
-                    Text(
-                      'Welcome Back',
-                      style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                        color: Colors.grey[600],
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                    const SizedBox(height: 48),
+                    const SizedBox(height: 32),
 
-                    // Email Field
+                    // Third Row - Email Field
                     TextFormField(
                       controller: _emailController,
                       keyboardType: TextInputType.emailAddress,
@@ -121,9 +115,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         return null;
                       },
                     ),
-                    const SizedBox(height: 16),
+                    const SizedBox(height: 24),
 
-                    // Password Field
+                    // Fourth Row - Password Field
                     TextFormField(
                       controller: _passwordController,
                       obscureText: !_isPasswordVisible,
@@ -157,7 +151,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         return null;
                       },
                     ),
-                    const SizedBox(height: 24),
+                    const SizedBox(height: 32),
 
                     // Login Button
                     SizedBox(
